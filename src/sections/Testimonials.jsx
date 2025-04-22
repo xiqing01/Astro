@@ -28,7 +28,7 @@ const Testimonials = () => {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 md:gap-8">
           {testimonials.map((t, index) => (
-            <blockquote key={index} className={twMerge(index === 2 && "md:hideen lg:block")}>
+            <blockquote key={index} className={twMerge(index === 2 && "md:hidden lg:block")}>
               <p className="font-heading text-3xl font-black">
                 &ldquo;{t.text}&ldquo;
               </p>

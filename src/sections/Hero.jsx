@@ -1,12 +1,22 @@
-import React from 'react'
+import  { useRef } from 'react'
 import CutCornerButton from '../components/CutCornerButton'
 import Hexagon from '../components/Hexagon'
 import Circle from '../components/Circle'
+import { motion, useScroll, useTransform } from 'motion/react'
 
 const Hero = () => {
+  const icosahedronRef = useRef(null)
+
+  const { scrollYProgress} = useScroll({
+    target: icosahedronRef,
+    offset: ["start end", "end start"],
+  })
+ 
+  const rotate = useTransform(scrollYProgress,[0, 1], [30, -45])
+
   return (
     <section className='py-24 md:py-52 overflow-hidden'>
-      <div className='container  mx-auto text-amber-50'>
+      <div className='container  mx-auto text-amber-50'>``
         <p className='uppercase font-extrabold text-center text-zinc-500 tracking-wide'>Introducing Blokforge</p>
         <h1 className='font-black text-5xl md:text-6xl lg:text-7xl text-center  max-w-3xl mx-auto '>The Future of Blokchain is Here.</h1>
         <p className='text-center text-xl md:text-2xl mt-6 max-w-xl mx-auto  text-zinc-400'>
@@ -18,17 +28,20 @@ const Hero = () => {
         <div className='flex justify-center mt-24'>
           <div className='inline-flex  relative z-0 mx-auto w-fit'>
             <div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'>
-              <Hexagon className='size-[1100px]' />
+              <Hexagon size={1100} />
             </div>
             <div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'>
-              <Hexagon className='size-[1800px]' />
+              <Hexagon size={1800} reverse duration={60} />
             </div>
-            <Circle className='left-[200px] top-[-920px]' img='cube' />
-            <Circle className='left-[200px] top-[270px]' img='cuboid' />
-            <Circle className='left-[-600px] top-[-80px]' img='torus' />
+            <Circle className='left-[340px] top-[-800px]' img='cube' minRotate={0} maxRotate={-360} animate={true} />
+            <Circle className='left-[300px] top-[400px]' img='cuboid' minRotate={20} maxRotate={-20} animate={true} />
+            <Circle className='left-[-500px] top-[80px]' img='torus' minRotate={20} maxRotate={-20}  />
         
-            <img src="/assets/images/icosahedron.png" alt=""  className='absolute w-[calc(100%+100px)] max-w-none -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 saturate-[10%] brightness-[30%]'/>
-            <img src="/assets/images/icosahedron.png" alt="Icosahedron 3D Image" className='w-[500px]' />
+            <motion.div className='inline-flex' style={{rotate:rotate}} ref={icosahedronRef}>
+              <img src="/assets/images/icosahedron.png" alt=""  className='absolute w-[calc(100%+100px)] max-w-none -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 saturate-[10%] brightness-[30%]'/>
+              <img src="/assets/images/icosahedron.png" alt="Icosahedron 3D Image" className='w-[500px]' />
+            </motion.div>
+            
           </div>
         </div>
 
