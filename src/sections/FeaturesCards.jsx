@@ -1,6 +1,15 @@
 import { twMerge } from "tailwind-merge";
-import TextButton from "../components/TextButton";
 import Card from "../components/Card";
+import { useEffect, useState } from "react";
+
+
+const cardBgMap = {
+  0: "bg-fuchsia-500",
+  1: "bg-lime-500",
+  2: "bg-cyan-500",
+  3: "bg-violet-500",
+};
+
 
 // 在组件外定义
 const cardData = [
@@ -35,6 +44,18 @@ const cardData = [
 ];
 
 const FeaturesCards = () => {
+  const [selectedCardIndex, setSelectedCardIndex] = useState(0)
+  const [isHovered, setIsHovered] = useState(false)
+
+  useEffect(() => {
+    if (isHovered) return; // 如果鼠标悬停在卡片上，则不执行自动切换
+    const timeout = setTimeout(() => {
+      setSelectedCardIndex((prevIndex) => (prevIndex + 1) % cardData.length);
+    },3000)
+
+    return () => clearTimeout(timeout)
+  },[selectedCardIndex, isHovered])
+
   return (
     <section className="py-24 overflow-x-clip md:-mt-28">
       <div className="container mx-auto text-amber-50">
@@ -45,7 +66,15 @@ const FeaturesCards = () => {
           <div className="flex flex-none gap-8">
             {cardData.map(
               ({ image, title, description, colorClass }, index) => (
-                <Card key={index} className='max-w-xs md:max-w-md' colorClass={colorClass} >
+                <div 
+                  className="inline-flex flex-none transition-transform duration-500 ease-in-out group"
+                  onMouseEnter={() => setIsHovered(true)}
+                  onMouseLeave={() => setIsHovered(false)}
+                  style={{
+                    transform:`translateX(calc((-100% - 2rem) * ${selectedCardIndex}))`,
+                  }}
+                >
+                  <Card key={index} className='max-w-xs md:max-w-md' colorClass={colorClass} >
                     <div className="flex justify-center -mt-28">
                       <div className="inline-flex relative">
                         <div className="absolute h-4 w-full top-[calc(100%+16px)] bg-zinc-950/70 group-hover:bg-zinc-950/30 transition duration-300 rounded-[100%] [mask-image:radial-gradient(closest-side,black,transparent)]"></div>
@@ -60,6 +89,8 @@ const FeaturesCards = () => {
                     <h3 className="font-black text-3xl mt-12">{title}</h3>
                     <p className="text-lg text-zinc-400 mt-4">{description}</p>
                 </Card>
+                </div>
+                
               )
             )}
           </div>
@@ -67,10 +98,16 @@ const FeaturesCards = () => {
 
         <div className="flex justify-center mt-10">
           <div className="bg-zinc-950 inline-flex gap-4 p-2.5 rounded-full">
-            {cardData.map((_, index) => (
+            {cardData.map(({title}, cardIndex) => (
               <div
-                key={index}
-                className="size-2.5 bg-zinc-500 rounded-full"
+                key={title}
+                className={twMerge("size-2.5 bg-zinc-500 rounded-full",
+                  selectedCardIndex === cardIndex
+                    ? cardBgMap[cardIndex] || "bg-zinc-500/30"
+
+                    : "bg-zinc-500/30"
+                )}
+                onClick={() => setSelectedCardIndex(cardIndex)}
               ></div>
             ))}
           </div>
