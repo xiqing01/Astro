@@ -16,7 +16,7 @@ const Hero = () => {
 
   return (
     <section className='py-24 md:py-52 overflow-hidden'>
-      <div className='container  mx-auto text-amber-50'>``
+      <div className='container  mx-auto text-amber-50'>
         <p className='uppercase font-extrabold text-center text-zinc-500 tracking-wide'>Introducing Blokforge</p>
         <h1 className='font-black text-5xl md:text-6xl lg:text-7xl text-center  max-w-3xl mx-auto '>The Future of Blokchain is Here.</h1>
         <p className='text-center text-xl md:text-2xl mt-6 max-w-xl mx-auto  text-zinc-400'>

@@ -1,13 +1,42 @@
+import {  useRef } from "react";
 import CutCornerButton from "../components/CutCornerButton";
-import TextButton from "../components/TextButton";
+import TextButton from "../components/TextButton"
+import { motion, useScroll,useTransform } from "motion/react"
 
-const listIems = [
+const listItems = [
   "Build and deploy your own blockchain",
   "Create and manage smart contracts",
   "Integrate with existing blockchain networks",
 ];
 
 const FeaturesGrid = () => {
+  const torusKontRef = useRef(null)
+  const hemisphereRef = useRef(null)
+  const coneRef = useRef(null)
+  const hemisphereTwoRef = useRef(null)
+
+  const { scrollYProgress: torusKontScrollYProgress } =  useScroll({
+    target: torusKontRef,
+    offset: ["start end","end start"], 
+  })
+
+  
+  const torusY = useTransform(torusKontScrollYProgress, [0, 1], [100, -100])
+  const torusRotate = useTransform(torusKontScrollYProgress, [0, 1], [30, -30])
+  const hemisphereY = useTransform(torusKontScrollYProgress, [0, 1], [100, -100])
+  const  hemisphereRotate  = useTransform(torusKontScrollYProgress, [0, 1], [30, -30])
+
+  const {scrollYProgress : secondScrollYProgress} = useScroll({
+    target: coneRef,
+    offset: ["start end","end start"],
+  })
+
+
+  const coneY = useTransform(secondScrollYProgress, [0, 1], [-100, 100])
+  const coneRotate = useTransform(secondScrollYProgress, [0, 1], [-30, 30])
+  const hemisphereTwoY = useTransform(secondScrollYProgress, [0, 1], [-100, 100])
+  const hemisphereTwoRotate = useTransform(secondScrollYProgress, [0, 1], [-30, 30])
+
   return (
     <section className="py-24 overflow-x-clip">
       <div className="container mx-auto text-amber-50 ">
@@ -23,7 +52,7 @@ const FeaturesGrid = () => {
                 blockchain applications.
               </p>
               <ul className="flex flex-col gap-8 mt-12 md:mt-14">
-                {listIems.map((item, index) => (
+                {listItems.map((item, index) => (
                   <li key={index} className="flex items-center gap-4">
                     <div className="inline-flex items-center justify-center size-4  outline-4 outline-fuchsia-500/20 rounded-[100%]">
                       <div className="size-1 bg-fuchsia-500 rounded-full"></div>
@@ -41,15 +70,25 @@ const FeaturesGrid = () => {
             </div>
             <div className="hidden md:block" >
               <div className="relative inline-flex z-0">
-                <img
+                <motion.img
                   src="/assets/images/torus-knot.png"
                   alt="Torus Knot 3D image"
                   className="size-96 max-w-none "
+                  ref={torusKontRef}
+                  style={{
+                    translateY: torusY,
+                    rotate: torusRotate,
+                  }}
                 />
-                <img
+                <motion.img
                   src="/assets/images/hemisphere.png"
-                  alt="Hemisphere Knot 3D image"
+                  alt="Hemisphere Knot 3D image" 
                   className="absolute size-80 top-3/4 -z-10 scale-x-[-1]"
+                  ref={hemisphereRef}
+                  style={{
+                    translateY: hemisphereY,
+                    rotate: hemisphereRotate,
+                  }}
                 />
               </div>
             </div>
@@ -58,15 +97,25 @@ const FeaturesGrid = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="relative hidden md:block">
               <div className="absolute right-0 top-0 z-0 ">
-                <img
+                <motion.img
                   src="/assets/images/cone.png"
                   alt="Cone 3D image"
                   className="size-96 max-w-none rotate-12"
+                  ref={coneRef}
+                  style={{
+                    translateY: coneY,
+                    rotate: coneRotate,
+                  }}
                 />
-                <img
+                <motion.img
                   src="/assets/images/hemisphere.png"
                   alt="Hemisphere Knot 3D image"
                   className="absolute size-80 top-3/4 -z-10 left-0"
+                  ref={hemisphereTwoRef}
+                  style={{
+                    translateY: hemisphereTwoY,
+                    rotate: hemisphereTwoRotate,
+                  }}
                 />
               </div>
             </div>

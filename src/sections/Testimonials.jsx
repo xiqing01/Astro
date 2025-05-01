@@ -1,6 +1,7 @@
 import { twMerge } from "tailwind-merge";
+import { motion } from "motion/react";
 
- const testimonials = [
+const testimonials = [
   {
     text: "The user experience is phenomenal, and the support team is always there to help. Highly recommended.",
     name: "Erica Wyatt",
@@ -21,14 +22,19 @@ import { twMerge } from "tailwind-merge";
   },
 ];
 
-
 const Testimonials = () => {
   return (
     <section className="text-amber-50 py-32 bg-zinc-800">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 md:gap-8">
           {testimonials.map((t, index) => (
-            <blockquote key={index} className={twMerge(index === 2 && "md:hidden lg:block")}>
+            <motion.blockquote
+              key={index}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: index * 0.4, esase: "easeInOut" }}
+              className={twMerge(index === 2 && "md:hidden lg:block")}
+            >
               <p className="font-heading text-3xl font-black">
                 &ldquo;{t.text}&ldquo;
               </p>
@@ -43,13 +49,11 @@ const Testimonials = () => {
                     <div className="text-lg font-black not-italic">
                       {t.name}
                     </div>
-                    <div className="text-zinc-400 not-italic">
-                      {t.title}
-                    </div>
+                    <div className="text-zinc-400 not-italic">{t.title}</div>
                   </div>
                 </div>
               </cite>
-            </blockquote>
+            </motion.blockquote>
           ))}
         </div>
       </div>
