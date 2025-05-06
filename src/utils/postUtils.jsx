@@ -1,14 +1,25 @@
-
 export const getPostColorFromCategory = (category) => {
   switch (category) {
     case "Sustainability":
-      return "lime"     
+      return "lime";
     case "Innovation":
-      return "cyan"     
+      return "cyan";
     case "Security":
-      return "violet"
+      return "violet";
     default:
-      return "fuchsia"
+      return "fuchsia";
   }
-}
-  
+};
+
+export const getColorFromPositionType = (type) => {
+  switch (type) {
+    case "Full Time":
+      return "lime";
+    case "Part Time":
+      return "cyan";
+    case "Contract":
+      return "violet";
+    default:
+      return "fuchsia";
+  }
+};

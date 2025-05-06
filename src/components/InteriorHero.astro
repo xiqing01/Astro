@@ -1,0 +1,19 @@
+---
+import Hexagon from "./Hexagon";
+---
+
+<sectiion class="relative overflow-x-clip">
+  <div
+    class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
+  >
+    <Hexagon size={800} className="" reverse duration={30} client:load />
+  </div>
+  <div
+    class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
+  >
+    <Hexagon size={1200} className="" duration={50} client:load />
+  </div>
+  <div class="container mx-auto text-amber-50 py-50">
+    <slot />
+  </div>
+</sectiion>
