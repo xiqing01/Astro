@@ -23,7 +23,7 @@ import Textarea from "../components/Textarea.astro";
   <InteriorContent>
     <div class="max-w-xl mx-auto">
       <h2 class="font-black text-3xl">What can we help you with?</h2>
-      <form action="" class="flex flex-col mt-8">
+      <form name="contact" method="POST" data-netlify="true" class="flex flex-col mt-8">
         <label for="name">Name</label>
         <Input type="text" name="name" id="name" className="mt-1" />
         <label for="email" class="mt-4">Email</label>

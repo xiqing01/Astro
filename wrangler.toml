@@ -1,0 +1,7 @@
+name = ""                 # ↖ Worker 在 Cloudflare 上的唯一标识
+compatibility_date = "2025-05-07"          # ↖ 跑最新 API 的日期，不可早于当天
+# type = "webpack"                           # ↖ 打包方式；已移除支持项
+
+[site]                                     # ↖ 声明这是一个静态站点
+bucket = "./dist"                          # ↖ 指向 Astro 构建输出目录
+entry-point = "workers-site"               # ↖ Wrangler 内置模板目录
