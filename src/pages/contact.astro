@@ -1,0 +1,41 @@
+---
+import Default from "../layouts/Default.astro";
+import InteriorHero from "../components/InteriorHero.astro";
+import InteriorContent from "../components/InteriorContent.astro";
+import CutCornerButton from "../components/CutCornerButton";
+import Input from "../components/Input.astro";
+import Textarea from "../components/Textarea.astro";
+---
+
+<Default>
+  <InteriorHero>
+    <p class="uppercase font-extrabold text-center text-zinc-400">Let's Talk</p>
+    <h1 class="font-black text-5xl md:text-6xl lg:text-7xl text-center mt-4">
+      Contact Us
+    </h1>
+    <p
+      class="text-center text-xl md:text-2xl mt-6 max-w-xl mx-auto text-zinc-400"
+    >
+      We're here to help and answer any questions you may have. Reach out to us
+      learn more about our services, get support, or to apply for positions.
+    </p>
+  </InteriorHero>
+  <InteriorContent>
+    <div class="max-w-xl mx-auto">
+      <h2 class="font-black text-3xl">What can we help you with?</h2>
+      <form action="" class="flex flex-col mt-8">
+        <label for="name">Name</label>
+        <Input type="text" name="name" id="name" className="mt-1" />
+        <label for="email" class="mt-4">Email</label>
+        <Input type="email" name="enmail" id="email" className="mt-1" />
+        
+          
+        <label for="message" class="mt-4">Message</label>
+        
+        <Textarea name="massage" id="message" className="mt-1" />
+
+        <CutCornerButton children={"Send Message"} className="mt-4" />
+      </form>
+    </div>
+  </InteriorContent>
+</Default>
